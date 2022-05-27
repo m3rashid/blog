@@ -1,9 +1,29 @@
-import { Button, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 
 const Hero = () => {
   return (
-    <Stack direction={{ base: "column", md: "row" }} my={{ md: 20 }}>
-      <Flex p={8} flex={1} align={"center"} justify={"center"}>
+    <Container
+      as={Stack}
+      direction={{ base: "column", md: "row" }}
+      py={{ md: 20 }}
+      px={0}
+      maxW={"6xl"}
+      align="center"
+    >
+      <Flex
+        flex={1}
+        alignItems="center"
+        justifyContent={"space-between"}
+        gap={4}
+      >
         <Stack spacing={6} w={"full"} maxW={"lg"}>
           <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
             <Text as={"span"} position={"relative"}>
@@ -37,7 +57,7 @@ const Hero = () => {
       <Flex flex={1}>
         <Image alt={"Login Image"} objectFit={"cover"} src="/hero.svg" />
       </Flex>
-    </Stack>
+    </Container>
   );
 };
 

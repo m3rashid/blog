@@ -1,16 +1,52 @@
 import Head from "next/head";
 import type { NextPage } from "next";
-import { Flex, SimpleGrid } from "@chakra-ui/react";
+import { Flex, SimpleGrid, Stack } from "@chakra-ui/react";
 
 import Hero from "../components/hero";
 import PostCard from "../components/postcard";
+import Categories from "../components/categories";
+import RelatedPosts from "../components/related";
+import { getPosts } from "../services";
+import { SinglePost } from "../services/types";
 
-const Home: NextPage = () => {
+const Home: React.FC<any> = ({ posts }) => {
   return (
-    <div>
+    <>
       <Head>
         <title>Home | Cubicle</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="Cubicle is a blog website which mainly focuses on the life of programmers in general. Also, includes programming tips, tricks and tutorials"
+        />
+        <meta
+          name="keywords"
+          content="cubicle, programming, coding, life, web development, coder, programmer, new skills, latest, technology, computer, science, nerdy, nerd"
+        />
+
+        <meta name="og:title" content="Home | Cubicle" />
+        <meta name="og:url" content="https://cubicle.vercel.app/" />
+        <meta
+          name="og:description"
+          content="Cubicle is a blog website which mainly focuses on the life of programmers in general. Also, includes programming tips, tricks and tutorials"
+        />
+
+        <meta name="twitter:title" content="Home | Cubicle" />
+        <meta
+          name="twitter:description"
+          content="Cubicle is a blog website which mainly focuses on the life of programmers in general. Also, includes programming tips, tricks and tutorials"
+        />
+
+        <link rel="apple-touch-icon" href="/fav.blue.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="/fav.blue.png" type="image/x-icon" />
+        <meta name="image" content="https://cubicle.vercel.app/fav.blue.png" />
+        <meta
+          name="og:image"
+          content="https://cubicle.vercel.app/fav.blue.png"
+        />
+        <meta
+          name="twitter:image"
+          content="https://cubicle.vercel.app/fav.blue.png"
+        />
       </Head>
       <Hero />
       <Flex justifyContent="center">
@@ -24,15 +60,28 @@ const Home: NextPage = () => {
             templateColumns={{ sm: "1fr", md: "1fr 1fr" }}
             spacing={6}
           >
-            <PostCard />
-            <PostCard />
-            <PostCard />
-            <PostCard />
+            {posts.map((post: SinglePost, index: number) => (
+              <PostCard key={index} post={post.node} />
+            ))}
           </SimpleGrid>
+          <Stack w={"full"} spacing={6}>
+            <Categories />
+            <RelatedPosts />
+          </Stack>
         </SimpleGrid>
       </Flex>
-    </div>
+    </>
   );
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const posts = (await getPosts()) || [];
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 20,
+  };
+}

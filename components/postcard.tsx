@@ -7,11 +7,14 @@ import {
   Stack,
   Avatar,
   useColorModeValue,
+  Link,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { IPost } from "../services/types";
 
-const PostCard = () => {
+const PostCard = ({ post }: { post: IPost }) => {
   return (
-    <Center py={6}>
+    <Center>
       <Box
         w={"full"}
         bg={useColorModeValue("white", "gray.900")}
@@ -29,43 +32,42 @@ const PostCard = () => {
           pos={"relative"}
         >
           <Image
-            src={
-              "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            }
+            src={post.featuredImage.url}
             layout={"fill"}
-            alt="Postcard"
+            alt={post.excerpt}
           />
         </Box>
         <Stack>
-          <Text
-            color={"blue.500"}
-            textTransform={"uppercase"}
-            fontWeight={800}
-            fontSize={"sm"}
-            letterSpacing={1.1}
-          >
-            Blog
-          </Text>
+          {post.categories.map((cat: any) => {
+            return (
+              <Text
+                color={"blue.500"}
+                textTransform={"uppercase"}
+                fontWeight={800}
+                fontSize={"sm"}
+                letterSpacing={1.1}
+                key={cat.slug}
+              >
+                {cat.name}
+              </Text>
+            );
+          })}
+
           <Heading
             color={useColorModeValue("gray.700", "white")}
             fontSize={"2xl"}
             fontFamily={"body"}
           >
-            Boost your conversion rate
+            <Link as={NextLink} href={`/post/${post.slug}`}>
+              {post.title}
+            </Link>
           </Heading>
-          <Text color={"gray.500"}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.
-          </Text>
+          <Text color={"gray.500"}>{post.excerpt}</Text>
         </Stack>
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
-          <Avatar
-            src={"https://avatars0.githubusercontent.com/u/1164541?v=4"}
-          />
+          <Avatar src={post.author.photo?.url} />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-            <Text fontWeight={600}>Achim Rolle</Text>
+            <Text fontWeight={600}>{post.author.name}</Text>
             <Text color={"gray.500"}>Feb 08, 2021 · 6min read</Text>
           </Stack>
         </Stack>
