@@ -12,6 +12,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import { HiExternalLink } from "react-icons/hi";
+import { RiDoubleQuotesL } from "react-icons/ri";
 
 const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
   let modifiedText = text;
@@ -23,19 +24,26 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
     if (obj.italic) {
       modifiedText = <em key={index}>{text}</em>;
     }
+
     if (obj.underline) {
       modifiedText = <u key={index}>{text}</u>;
     }
+
     if (obj.code) {
       modifiedText = (
         <Code
-          // className="bg-gray-900 px-3 py-0.5 rounded-md lg:rounded-lg"
+          as="kbd"
+          px={1}
+          mx={1}
+          fontWeight={600}
+          fontFamily="monospace"
           key={index}
         >
           {text}
         </Code>
       );
     }
+
     if (obj.type === "link") {
       modifiedText = (
         <Link
@@ -58,7 +66,13 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
   switch (type) {
     case "heading-one":
       return (
-        <Heading as="h1" size="3xl" key={index}>
+        <Heading
+          as="h1"
+          fontFamily="Quicksand, sans-serif"
+          size="3xl"
+          mb={2}
+          key={index}
+        >
           {modifiedText.map((item: any, i: number) => (
             <React.Fragment key={i}>{item}</React.Fragment>
           ))}
@@ -67,7 +81,13 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
 
     case "heading-two":
       return (
-        <Heading as="h2" size="2xl" key={index}>
+        <Heading
+          as="h2"
+          fontFamily="Quicksand, sans-serif"
+          size="2xl"
+          mb={2}
+          key={index}
+        >
           {modifiedText.map((item: any, i: number) => (
             <React.Fragment key={i}>{item}</React.Fragment>
           ))}
@@ -76,7 +96,13 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
 
     case "heading-three":
       return (
-        <Heading as="h3" size="xl" key={index}>
+        <Heading
+          as="h3"
+          fontFamily="Quicksand, sans-serif"
+          size="xl"
+          mb={2}
+          key={index}
+        >
           {modifiedText.map((item: any, i: number) => (
             <React.Fragment key={i}>{item}</React.Fragment>
           ))}
@@ -85,7 +111,13 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
 
     case "heading-four":
       return (
-        <Heading as="h4" size="lg" key={index}>
+        <Heading
+          as="h4"
+          fontFamily="Quicksand, sans-serif"
+          size="lg"
+          mb={2}
+          key={index}
+        >
           {modifiedText.map((item: any, i: number) => (
             <React.Fragment key={i}>{item}</React.Fragment>
           ))}
@@ -94,7 +126,13 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
 
     case "heading-five":
       return (
-        <Heading as="h5" size="md" key={index}>
+        <Heading
+          as="h5"
+          fontFamily="Quicksand, sans-serif"
+          size="md"
+          mb={2}
+          key={index}
+        >
           {modifiedText.map((item: any, i: number) => (
             <React.Fragment key={i}>{item}</React.Fragment>
           ))}
@@ -103,7 +141,13 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
 
     case "heading-six":
       return (
-        <Heading as="h5" size="sm" key={index}>
+        <Heading
+          as="h5"
+          fontFamily="Quicksand, sans-serif"
+          size="sm"
+          mb={2}
+          key={index}
+        >
           {modifiedText.map((item: any, i: number) => (
             <React.Fragment key={i}>{item}</React.Fragment>
           ))}
@@ -112,7 +156,7 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
 
     case "paragraph":
       return (
-        <Text key={index} mb={6}>
+        <Text fontFamily="Quicksand, sans-serif" key={index} mb={6}>
           {modifiedText.map((item: any, i: number) => (
             <React.Fragment key={i}>{item}</React.Fragment>
           ))}
@@ -120,16 +164,6 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
       );
 
     case "block-quote":
-      const leftQuote = (
-        <Box as="span" mr={2}>
-          <Image
-            src="/left-quote.png"
-            height="30px"
-            width="30px"
-            alt="left-quote"
-          />
-        </Box>
-      );
       return (
         <Box
           key={`quote-${index}`}
@@ -139,17 +173,23 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
           borderColor="blue.300"
           textAlign="justify"
           rounded="md"
+          fontWeight={500}
         >
-          {leftQuote}
+          <RiDoubleQuotesL
+            style={{ display: "inline-block", marginRight: "10px" }}
+            size="1.5em"
+          />
           {modifiedText.map((item: any, i: number) => (
-            <React.Fragment key={i}>{item}</React.Fragment>
+            <Text as="cite" key={i}>
+              {item}
+            </Text>
           ))}
         </Box>
       );
 
     case "image":
       return (
-        <img
+        <Image
           key={index}
           alt={obj.title}
           height={obj.height}
@@ -163,13 +203,15 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
       modifiedText = a.replace(/\n/g, "<br />");
       return (
         <Code
-          width="full"
-          key={index}
           py={3}
           px={2}
           mb={6}
+          key={index}
           rounded="md"
-          overflowX="auto"
+          width="full"
+          style={{ overflowX: "auto" }}
+          fontFamily="monospace"
+          className="scrollbar-style"
           dangerouslySetInnerHTML={{ __html: modifiedText }}
         />
       );

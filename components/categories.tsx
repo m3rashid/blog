@@ -1,6 +1,7 @@
-import { Box, Link, useColorModeValue } from "@chakra-ui/react";
-import NextLink from "next/link";
 import React from "react";
+import NextLink from "next/link";
+import { Box, Link, useColorModeValue } from "@chakra-ui/react";
+
 import { getCategories } from "../services";
 import { ICategory } from "../services/types";
 

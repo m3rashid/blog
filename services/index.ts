@@ -69,6 +69,7 @@ export const getPostDetails = async (slug: string) => {
           linkedinUsername
           instagramUsername
           githubUsername
+          portfolioUrl
           photo {
             url
           }

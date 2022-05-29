@@ -1,3 +1,4 @@
+import moment from "moment";
 import Image from "next/image";
 import {
   Box,
@@ -11,13 +12,13 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { IPost } from "../services/types";
-import moment from "moment";
 
 const PostCard = ({ post }: { post: IPost }) => {
   return (
     <Center>
       <Box
         w={"full"}
+        h={"full"}
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
         rounded={"md"}
@@ -38,26 +39,27 @@ const PostCard = ({ post }: { post: IPost }) => {
             alt={post.excerpt}
           />
         </Box>
+        {post.categories.map((cat: any) => {
+          return (
+            <Text
+              display={"inline-block"}
+              mr={3}
+              color={"blue.500"}
+              textTransform={"uppercase"}
+              fontWeight={800}
+              fontSize={"sm"}
+              letterSpacing={1.1}
+              key={cat.slug}
+            >
+              {cat.name}
+            </Text>
+          );
+        })}
         <Stack>
-          {post.categories.map((cat: any) => {
-            return (
-              <Text
-                color={"blue.500"}
-                textTransform={"uppercase"}
-                fontWeight={800}
-                fontSize={"sm"}
-                letterSpacing={1.1}
-                key={cat.slug}
-              >
-                {cat.name}
-              </Text>
-            );
-          })}
-
           <Heading
             color={useColorModeValue("gray.700", "white")}
             fontSize={"2xl"}
-            fontFamily={"body"}
+            fontFamily="Quicksand, sans-serif"
           >
             <Link as={NextLink} href={`/post/${post.slug}`}>
               {post.title}

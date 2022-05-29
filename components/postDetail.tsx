@@ -11,11 +11,16 @@ const PostDetail: React.FC<IProps> = ({ post }) => {
   const bgC = useColorModeValue("white", "gray.900");
 
   return (
-    <Box w={"full"} bg={bgC} boxShadow={"2xl"} rounded={"lg"}>
-      <Image src={post.featuredImage.url} alt={post.title} roundedTop="md" />
+    <Box bg={bgC} boxShadow={"2xl"} rounded={"lg"}>
+      <Image
+        src={post.featuredImage.url}
+        alt={post.title}
+        roundedTop="md"
+        width={"full"}
+      />
       <Box p={6}>
         <Box>
-          <Heading as="h1" mb={8} size="2xl">
+          <Heading as="h1" mb={8} size="2xl" fontFamily="Quicksand, sans-serif">
             {post.title}
           </Heading>
           <Box>
@@ -24,7 +29,6 @@ const PostDetail: React.FC<IProps> = ({ post }) => {
                 (item: any, itemindex: number) =>
                   getContentFragment(itemindex, item.text, item)
               );
-
               return getContentFragment(index, children, typeObj, typeObj.type);
             })}
           </Box>

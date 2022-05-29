@@ -21,5 +21,5 @@ body::-webkit-scrollbar-track {
 * {
   padding: 0;
   margin: 0;
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "Quicksand", sans-serif;
 }

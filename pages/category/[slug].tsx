@@ -25,14 +25,14 @@ const Category: React.FC<IProps> = () => {
             templateColumns={{ sm: "1fr", md: "1fr 1fr" }}
             spacing={6}
           >
+            {/* <PostCard />
             <PostCard />
             <PostCard />
-            <PostCard />
-            <PostCard />
+            <PostCard /> */}
           </SimpleGrid>
           <Stack w={"full"} spacing={6}>
             <Categories />
-            <RelatedPosts />
+            {/* <RelatedPosts /> */}
           </Stack>
         </SimpleGrid>
       </Flex>

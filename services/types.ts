@@ -33,6 +33,7 @@ export interface IAuthor {
   linkedinUsername: string;
   instagramUsername: string;
   githubUsername: string;
+  portfolioUrl?: string;
   photo: {
     url: string;
   };

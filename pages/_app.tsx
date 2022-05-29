@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 
 import Footer from "../components/footer";
@@ -6,12 +6,18 @@ import Header from "../components/header";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const customTheme = extendTheme({
+    fonts: {
+      html: "Quicksand, sans-serif",
+    },
+  });
+
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <Header />
-      <div>
+      <Box padding={{ sm: "5px", md: "0" }}>
         <Component {...pageProps} />
-      </div>
+      </Box>
       <Footer />
     </ChakraProvider>
   );

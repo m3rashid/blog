@@ -25,7 +25,10 @@ const Hero = () => {
         gap={4}
       >
         <Stack spacing={6} w={"full"} maxW={"lg"}>
-          <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
+          <Heading
+            fontFamily="Quicksand, sans-serif"
+            fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+          >
             <Text as={"span"} position={"relative"}>
               Cubicle
             </Text>

@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Author from "../../components/author";
 import Categories from "../../components/categories";
+import Comments from "../../components/comments";
 import PostDetail from "../../components/postDetail";
 import RelatedPosts from "../../components/related";
 import { getPostDetails, getPosts } from "../../services";
@@ -22,15 +23,12 @@ interface IProps {
 
 const Post: React.FC<IProps> = ({ post }) => {
   const router = useRouter();
-
   const bgC = useColorModeValue("white", "gray.900");
-
+  const keywords = post.title.split(" ");
+  const result = keywords.filter((word: string) => word.length > 4);
   if (router.isFallback) {
     return <Spinner />;
   }
-
-  const keywords = post.title.split(" ");
-  const result = keywords.filter((word: string) => word.length > 4);
 
   return (
     <Container as={Stack} px={0} maxW={"6xl"} mb={6}>
@@ -54,23 +52,19 @@ const Post: React.FC<IProps> = ({ post }) => {
       <SimpleGrid
         templateColumns={{ sm: "1fr", md: "2fr 1fr" }}
         spacing={8}
-        maxW={"6xl"}
         py={6}
       >
-        <SimpleGrid w={"full"} spacing={6}>
-          <PostDetail post={post} />
-        </SimpleGrid>
-        <Stack w={"full"} spacing={6}>
+        <PostDetail post={post} />
+        <Stack width={"full"} spacing={6}>
           <Author author={post.author} />
           {/* <Categories /> */}
           <RelatedPosts slug={post.slug} createdAt={post.createdAt} />
         </Stack>
       </SimpleGrid>
+
       <Box w={"full"} bg={bgC} boxShadow={"2xl"} rounded={"lg"}>
         <SimpleGrid templateColumns={{ sm: "1fr", md: "9fr 5fr" }} spacing={8}>
-          <Box w={"full"} p={6}>
-            Previous COmments
-          </Box>
+          {/* <Comments slug={post.slug} /> */}
           <Box w={"full"} p={6}>
             Create Comment
           </Box>
@@ -85,7 +79,9 @@ export default Post;
 export async function getStaticProps({ params }: { params: { slug: string } }) {
   const data = await getPostDetails(params.slug);
   return {
-    props: { post: data },
+    props: {
+      post: data,
+    },
     revalidate: 20,
   };
 }
@@ -94,7 +90,9 @@ export async function getStaticPaths() {
   const posts = await getPosts();
   return {
     paths: posts.map(({ node: { slug } }: { node: { slug: string } }) => ({
-      params: { slug },
+      params: {
+        slug,
+      },
     })),
     fallback: true,
   };

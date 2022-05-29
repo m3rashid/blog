@@ -17,6 +17,7 @@ const NotFound = () => {
         size="2xl"
         bgGradient="linear(to-r, blue.400, blue.600)"
         backgroundClip="text"
+        fontFamily="Quicksand, sans-serif"
       >
         404
       </Heading>
