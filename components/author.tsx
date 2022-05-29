@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { IAuthor } from "../services/types";
 
 const FlexLine = ({
   Icon,
@@ -35,7 +36,11 @@ const FlexLine = ({
   );
 };
 
-const Author = () => {
+interface IProps {
+  author: IAuthor;
+}
+
+const Author: React.FC<IProps> = ({ author }) => {
   return (
     <Box
       w={"full"}
@@ -45,28 +50,22 @@ const Author = () => {
       p={6}
       textAlign={"center"}
     >
-      <Avatar
-        size={"xl"}
-        src={
-          "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-        }
-        mb={4}
-      />
+      <Avatar size={"xl"} src={author.photo.url} mb={4} />
       <Heading fontSize={"2xl"} fontFamily={"body"}>
-        Lindsey James
+        {author.name}
       </Heading>
-      <FlexLine Icon={FaTwitter} label="@lindsey_jam3s" />
-      <FlexLine Icon={FaInstagram} label="@lindsey_jam3s" />
+      <FlexLine Icon={FaTwitter} label={author.twitterUsername} />
+      <FlexLine Icon={FaInstagram} label={author.instagramUsername} />
 
       <Text
         textAlign={"center"}
         color={useColorModeValue("gray.700", "gray.400")}
         px={3}
       >
-        Actress, musician, songwriter and artist. PM for work inquires
+        {author.bio}
       </Text>
 
-      <Stack mt={8} direction={"row"} spacing={4}>
+      <Stack mt={8} direction={"row"} spacing={4} align="center">
         <Button
           fontSize={"sm"}
           rounded={"full"}
@@ -74,7 +73,7 @@ const Author = () => {
             bg: "gray.200",
           }}
         >
-          <FlexLine Icon={FaGithub} label="@lindsey_jam3s" />
+          <FlexLine Icon={FaGithub} label={author.githubUsername} />
         </Button>
         <Button
           fontSize={"sm"}
@@ -85,7 +84,11 @@ const Author = () => {
             bg: "blue.500",
           }}
         >
-          <FlexLine Icon={FaLinkedin} label="@lindsey_jam3s" color="white" />
+          <FlexLine
+            Icon={FaLinkedin}
+            label={author.linkedinUsername}
+            color="white"
+          />
         </Button>
       </Stack>
     </Box>

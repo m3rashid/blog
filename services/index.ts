@@ -50,7 +50,6 @@ export const getCategories = async () => {
   `;
 
   const result = await request(graphqlAPI, query);
-
   return result.categories;
 };
 
@@ -66,6 +65,10 @@ export const getPostDetails = async (slug: string) => {
         author {
           name
           bio
+          twitterUsername
+          linkedinUsername
+          instagramUsername
+          githubUsername
           photo {
             url
           }

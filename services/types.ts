@@ -29,6 +29,10 @@ export interface IAuthor {
   bio: string;
   name: string;
   id: string;
+  twitterUsername: string;
+  linkedinUsername: string;
+  instagramUsername: string;
+  githubUsername: string;
   photo: {
     url: string;
   };
@@ -48,6 +52,7 @@ export interface IPost {
   featuredImage: {
     url: string;
   };
+  content: any;
   categories: ICategory[];
 }
 

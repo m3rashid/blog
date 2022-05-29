@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { IPost } from "../services/types";
+import moment from "moment";
 
 const PostCard = ({ post }: { post: IPost }) => {
   return (
@@ -68,7 +69,9 @@ const PostCard = ({ post }: { post: IPost }) => {
           <Avatar src={post.author.photo?.url} />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
             <Text fontWeight={600}>{post.author.name}</Text>
-            <Text color={"gray.500"}>Feb 08, 2021 · 6min read</Text>
+            <Text color={"gray.500"}>
+              {moment(post.createdAt).format("MMM DD, YYYY")}
+            </Text>
           </Stack>
         </Stack>
       </Box>
