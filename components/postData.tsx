@@ -203,15 +203,15 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
       modifiedText = a.replace(/\n/g, "<br />");
       return (
         <Code
+          key={index}
+          overflowX="auto"
           py={3}
           px={2}
           mb={6}
-          key={index}
           rounded="md"
-          width="full"
-          style={{ overflowX: "auto" }}
+          width="100%"
           fontFamily="monospace"
-          className="scrollbar-style"
+          wordBreak="break-all"
           dangerouslySetInnerHTML={{ __html: modifiedText }}
         />
       );

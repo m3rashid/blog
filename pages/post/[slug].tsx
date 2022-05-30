@@ -57,19 +57,17 @@ const Post: React.FC<IProps> = ({ post }) => {
         <PostDetail post={post} />
         <Stack width={"full"} spacing={6}>
           <Author author={post.author} />
-          {/* <Categories /> */}
+          <Categories />
           <RelatedPosts slug={post.slug} createdAt={post.createdAt} />
         </Stack>
       </SimpleGrid>
 
-      <Box w={"full"} bg={bgC} boxShadow={"2xl"} rounded={"lg"}>
-        <SimpleGrid templateColumns={{ sm: "1fr", md: "9fr 5fr" }} spacing={8}>
-          {/* <Comments slug={post.slug} /> */}
-          <Box w={"full"} p={6}>
-            Create Comment
-          </Box>
-        </SimpleGrid>
-      </Box>
+      <SimpleGrid templateColumns={{ sm: "1fr", md: "2fr 1fr" }} spacing={8}>
+        <Comments slug={post.slug} />
+        <Box w={"full"} bg={bgC} boxShadow={"2xl"} rounded={"lg"} p={6}>
+          Create Comment
+        </Box>
+      </SimpleGrid>
     </Container>
   );
 };

@@ -33,7 +33,8 @@ const Footer = () => {
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
-          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
+          templateColumns="1fr 1fr"
+          justifyContent="space-between"
           spacing={8}
         >
           <Stack spacing={6}>
@@ -53,35 +54,8 @@ const Footer = () => {
             <Text fontSize={"sm"}>
               &copy; {new Date().getFullYear()} Cubicle. All rights reserved
             </Text>
-            <Stack direction={"row"} spacing={6}>
-              <SocialButton label={"Twitter"} href={"#"}>
-                <FaTwitter />
-              </SocialButton>
-              <SocialButton label={"YouTube"} href={"#"}>
-                <FaYoutube />
-              </SocialButton>
-              <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram />
-              </SocialButton>
-            </Stack>
           </Stack>
-          <Stack align={"flex-start"}>
-            <ListHeader>Company</ListHeader>
-            <Link href={"#"}>About us</Link>
-            <Link href={"#"}>Blog</Link>
-            <Link href={"#"}>Contact us</Link>
-            <Link href={"#"}>Pricing</Link>
-            <Link href={"#"}>Testimonials</Link>
-          </Stack>
-          <Stack align={"flex-start"}>
-            <ListHeader>Support</ListHeader>
-            <Link href={"#"}>Help Center</Link>
-            <Link href={"#"}>Terms of Service</Link>
-            <Link href={"#"}>Legal</Link>
-            <Link href={"#"}>Privacy Policy</Link>
-            <Link href={"#"}>Satus</Link>
-          </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={"flex-end"}>
             <ListHeader>Stay up to date</ListHeader>
             <Stack direction={"row"}>
               <Input

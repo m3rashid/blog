@@ -11,18 +11,21 @@ const Categories: React.FC<IProps> = () => {
   const [categories, setCategories] = React.useState<ICategory[]>([]);
 
   React.useEffect(() => {
-    getCategories().then((newCategories) => {
-      setCategories(newCategories);
-    });
+    getCategories()
+      .then((cat) => {
+        console.log(cat);
+        setCategories(cat);
+      })
+      .catch(console.log);
   }, []);
 
   return (
     <Box
-      w={"full"}
+      w="full"
       maxHeight="min-content"
       bg={useColorModeValue("white", "gray.900")}
-      boxShadow={"2xl"}
-      rounded={"lg"}
+      boxShadow="2xl"
+      rounded="lg"
       p={6}
     >
       <div>
