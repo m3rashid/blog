@@ -11,12 +11,7 @@ const Categories: React.FC<IProps> = () => {
   const [categories, setCategories] = React.useState<ICategory[]>([]);
 
   React.useEffect(() => {
-    getCategories()
-      .then((cat) => {
-        console.log(cat);
-        setCategories(cat);
-      })
-      .catch(console.log);
+    getCategories().then((cat) => setCategories(cat));
   }, []);
 
   return (
@@ -32,7 +27,7 @@ const Categories: React.FC<IProps> = () => {
         <Box fontSize={20} fontWeight="bold" mb={4}>
           Categories
         </Box>
-        {categories.map((c) => {
+        {categories.map((c: any) => {
           return (
             <Link as={NextLink} key={c.slug} href={`/category/${c.slug}`}>
               {c.name}

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import type { NextPage } from "next";
 import { Flex, SimpleGrid, Stack } from "@chakra-ui/react";
 
 import Hero from "../components/hero";
@@ -66,7 +65,7 @@ const Home: React.FC<any> = ({ posts }) => {
           </SimpleGrid>
           <Stack w={"full"} spacing={6}>
             <Categories />
-            <RelatedPosts />
+            {/* <RelatedPosts /> */}
           </Stack>
         </SimpleGrid>
       </Flex>

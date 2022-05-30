@@ -33,7 +33,11 @@ const Header = () => {
                 width={50}
                 alt="Cubicle logo"
               />
-              <Heading order={2} fontFamily="Quicksand, sans-serif">
+              <Heading
+                order={2}
+                fontSize="3xl"
+                fontFamily="Quicksand, sans-serif"
+              >
                 Cubicle
               </Heading>
             </Flex>

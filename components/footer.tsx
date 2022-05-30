@@ -46,7 +46,11 @@ const Footer = () => {
                   width={50}
                   alt="Cubicle logo"
                 />
-                <Heading order={5} fontFamily="Quicksand, sans-serif">
+                <Heading
+                  order={5}
+                  fontSize="2xl"
+                  fontFamily="Quicksand, sans-serif"
+                >
                   Cubicle
                 </Heading>
               </Flex>
