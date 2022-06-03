@@ -11,7 +11,10 @@ const Categories: React.FC<IProps> = () => {
   const [categories, setCategories] = React.useState<ICategory[]>([]);
 
   React.useEffect(() => {
-    getCategories().then((cat) => setCategories(cat));
+    getCategories().then((cat) => {
+      console.log(cat);
+      setCategories(cat);
+    });
   }, []);
 
   return (

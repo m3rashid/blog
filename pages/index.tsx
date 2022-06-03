@@ -1,12 +1,15 @@
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { Flex, SimpleGrid, Stack } from "@chakra-ui/react";
 
 import Hero from "../components/hero";
 import PostCard from "../components/postcard";
-import Categories from "../components/categories";
-import RelatedPosts from "../components/related";
+// import RelatedPosts from "../components/related";
 import { getPosts } from "../services";
 import { SinglePost } from "../services/types";
+const Categories = dynamic(() => import("../components/categories"), {
+  ssr: false,
+});
 
 const Home: React.FC<any> = ({ posts }) => {
   return (

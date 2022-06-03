@@ -33,9 +33,7 @@ export const getPosts = async () => {
       }
     }
   `;
-
   const result = await request(graphqlAPI, query);
-
   return result.postsConnection.edges;
 };
 
@@ -48,7 +46,6 @@ export const getCategories = async () => {
       }
     }
   `;
-
   const result = await request(graphqlAPI, query);
   return result.categories;
 };
@@ -86,9 +83,7 @@ export const getPostDetails = async (slug: string) => {
       }
     }
   `;
-
   const result = await request(graphqlAPI, query, { slug });
-
   return result.post;
 };
 
@@ -112,7 +107,6 @@ export const getSimilarPosts = async (categories: string[], slug: string) => {
     }
   `;
   const result = await request(graphqlAPI, query, { slug, categories });
-
   return result.posts;
 };
 
@@ -148,9 +142,7 @@ export const getAdjacentPosts = async (
       }
     }
   `;
-
   const result = await request(graphqlAPI, query, { slug, createdAt });
-
   return { next: result.next[0], previous: result.previous[0] };
 };
 
@@ -185,9 +177,7 @@ export const getCategoryPost = async (slug: string) => {
       }
     }
   `;
-
   const result = await request(graphqlAPI, query, { slug });
-
   return result.postsConnection.edges;
 };
 
@@ -210,9 +200,7 @@ export const getFeaturedPosts = async () => {
       }
     }   
   `;
-
   const result = await request(graphqlAPI, query);
-
   return result.posts;
 };
 
@@ -222,7 +210,6 @@ export const submitComment = async (obj: Object) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(obj),
   });
-
   return result.json();
 };
 
@@ -236,9 +223,7 @@ export const getComments = async (slug: string) => {
       }
     }
   `;
-
   const result = await request(graphqlAPI, query, { slug });
-
   return result.comments;
 };
 
@@ -259,6 +244,5 @@ export const getRecentPosts = async () => {
     }
   `;
   const result = await request(graphqlAPI, query);
-
   return result.posts;
 };
