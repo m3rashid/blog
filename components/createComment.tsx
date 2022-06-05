@@ -91,6 +91,7 @@ const CreateComment: React.FC<IProps> = ({ slug }) => {
           rounded="md"
           placeholder="Leave a comment"
           name="comment"
+          required
         />
         <Input
           ref={nameEl}
@@ -100,6 +101,9 @@ const CreateComment: React.FC<IProps> = ({ slug }) => {
           outline="none"
           w={"full"}
           rounded="md"
+          placeholder="Enter your name"
+          name="name"
+          required
         />
         <Checkbox ref={storeDataEl} colorScheme={"green"} defaultChecked>
           Save name for later
