@@ -55,7 +55,6 @@ const CreateComment: React.FC<IProps> = ({ slug }) => {
     }
     submitComment(commentObj)
       .then((res) => {
-        console.log(res);
         toast({
           id,
           title: "Success",
@@ -103,7 +102,7 @@ const CreateComment: React.FC<IProps> = ({ slug }) => {
           rounded="md"
         />
         <Checkbox ref={storeDataEl} colorScheme={"green"} defaultChecked>
-          Save name for next time
+          Save name for later
         </Checkbox>
         <Button onClick={handleCommentSubmission}>Post Comment</Button>
       </Flex>

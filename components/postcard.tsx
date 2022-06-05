@@ -26,8 +26,7 @@ const PostCard: React.FC<IProps> = ({ post }) => {
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
         rounded={"md"}
-        px={{ base: 2, md: 6 }}
-        py={{ base: 4, md: 6 }}
+        p={{ base: 4, md: 6 }}
         overflow={"hidden"}
       >
         <Box

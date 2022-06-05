@@ -30,7 +30,7 @@ const RecentPosts: React.FC<IProps> = ({ categories, slug }) => {
       bg={useColorModeValue("white", "gray.900")}
       boxShadow="2xl"
       rounded="lg"
-      p={6}
+      p={4}
     >
       <div>
         <Box fontSize={20} fontWeight="bold" mb={4}>

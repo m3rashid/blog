@@ -8,10 +8,13 @@ import {
   Stack,
   useColorModeValue,
 } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
-import Categories from "../../components/categories";
+const Categories = dynamic(() => import("../../components/categories"), {
+  ssr: false,
+});
 import PostCard from "../../components/postcard";
 import { getCategories, getCategoryPost } from "../../services";
 import { SinglePost } from "../../services/types";
@@ -86,7 +89,9 @@ const Category: React.FC<IProps> = ({ posts }) => {
               No posts found
             </Box>
           )}
-          <Categories />
+          <Stack w={"full"} spacing={6}>
+            <Categories />
+          </Stack>
         </SimpleGrid>
       </Flex>
     </>

@@ -54,7 +54,7 @@ const Comments: React.FC<IProps> = ({ slug }) => {
               <Text fontWeight={600}>{comment.name}</Text>
               <Text fontSize="md">{comment.comment}</Text>
               <Text color={"gray.500"}>
-                {moment(comment.createdAt).format("MMM DD, YYYY")}
+                {moment(comment.createdAt).format("LLLL")}
               </Text>
             </Stack>
           </Stack>

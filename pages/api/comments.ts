@@ -1,31 +1,51 @@
 import { GraphQLClient, gql } from "graphql-request";
 import { NextApiRequest, NextApiResponse } from "next";
-const graphqlAPI = process.env.NEXT_PUBLIC_CONTENT_API as string;
 
-const asynchandler = async (req: NextApiRequest, res: NextApiResponse) => {
+const graphqlAPI = process.env.NEXT_PUBLIC_CONTENT_API as string;
+const grapqhqlToken = process.env.TOKEN as string;
+
+const asyncHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const graphQLClient = new GraphQLClient(graphqlAPI, {
-    headers: { Authorization: `Bearer ${process.env.TOKEN}` },
+    headers: {
+      authorization: `Bearer ${grapqhqlToken}`,
+    },
   });
 
-  const query = gql`
-    mutation CreateComment($name: String!, $comment: String!, $slug: String!) {
-      createComment(
-        data: {
-          name: $name
-          comment: $comment
-          post: { connect: { slug: $slug } }
-        }
-      ) {
-        id
-      }
-    }
-  `;
   try {
+    const query = gql`
+      mutation CreateComment(
+        $name: String!
+        $comment: String!
+        $slug: String!
+      ) {
+        createComment(
+          data: {
+            name: $name
+            comment: $comment
+            post: { connect: { slug: $slug } }
+          }
+        ) {
+          id
+        }
+      }
+    `;
     const result = await graphQLClient.request(query, req.body);
-    return res.status(200).send(result);
+
+    const mutation = gql`
+      mutation publishComment($id: ID!) {
+        publishComment(where: { id: $id }) {
+          name
+        }
+      }
+    `;
+    const pubRes = await graphQLClient.request(mutation, {
+      id: result.createComment.id,
+    });
+    return res.status(200).send(pubRes);
   } catch (err) {
     console.log(err);
+    return res.status(500).send(err);
   }
 };
 
-export default asynchandler;
+export default asyncHandler;
