@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={customTheme}>
       <Header />
-      <Box padding={{ sm: "5px", md: "0" }} minHeight="85vh">
+      <Box minHeight="85vh">
         <Component {...pageProps} />
       </Box>
       <Footer />

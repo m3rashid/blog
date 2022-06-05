@@ -1,12 +1,12 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Flex, SimpleGrid, Stack } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid, Stack } from "@chakra-ui/react";
 
 import Hero from "../components/hero";
 import PostCard from "../components/postcard";
-// import RelatedPosts from "../components/related";
 import { getPosts } from "../services";
 import { SinglePost } from "../services/types";
+import RecentPosts from "../components/recentPosts";
 const Categories = dynamic(() => import("../components/categories"), {
   ssr: false,
 });
@@ -50,28 +50,30 @@ const Home: React.FC<any> = ({ posts }) => {
           content="https://cubicle.vercel.app/fav.blue.png"
         />
       </Head>
-      <Hero />
-      <Flex justifyContent="center">
-        <SimpleGrid
-          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr" }}
-          spacing={8}
-          maxW={"6xl"}
-          py={10}
-        >
+      <Box padding={"10px"}>
+        <Hero />
+        <Flex justifyContent="center">
           <SimpleGrid
-            templateColumns={{ sm: "1fr", md: "1fr 1fr" }}
-            spacing={6}
+            templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr" }}
+            spacing={8}
+            maxW={"6xl"}
+            py={10}
           >
-            {posts.map((post: SinglePost, index: number) => (
-              <PostCard key={index} post={post.node} />
-            ))}
+            <SimpleGrid
+              templateColumns={{ sm: "1fr", md: "1fr 1fr" }}
+              spacing={6}
+            >
+              {posts.map((post: SinglePost, index: number) => (
+                <PostCard key={index} post={post.node} />
+              ))}
+            </SimpleGrid>
+            <Stack w={"full"} spacing={6}>
+              <RecentPosts />
+              <Categories />
+            </Stack>
           </SimpleGrid>
-          <Stack w={"full"} spacing={6}>
-            <Categories />
-            {/* <RelatedPosts /> */}
-          </Stack>
-        </SimpleGrid>
-      </Flex>
+        </Flex>
+      </Box>
     </>
   );
 };

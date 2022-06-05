@@ -1,6 +1,6 @@
 import { request, gql } from "graphql-request";
 
-const graphqlAPI = process.env.CONTENT_API as string;
+const graphqlAPI = process.env.NEXT_PUBLIC_CONTENT_API as string;
 
 export const getPosts = async () => {
   const query = gql`
@@ -39,7 +39,7 @@ export const getPosts = async () => {
 
 export const getCategories = async () => {
   const query = gql`
-    query GetGategories {
+    query GetCategories {
       categories {
         name
         slug
@@ -232,6 +232,7 @@ export const getRecentPosts = async () => {
     query GetPostDetails() {
       posts(
         orderBy: createdAt_DESC
+         skip: 6
         first: 3
       ) {
         title

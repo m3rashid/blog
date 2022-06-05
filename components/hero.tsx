@@ -1,12 +1,4 @@
-import {
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Image,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Container, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
 
 const Hero = () => {
   return (
@@ -15,6 +7,7 @@ const Hero = () => {
       direction={{ base: "column", md: "row" }}
       py={{ md: 20 }}
       px={0}
+      spacing={6}
       maxW={"6xl"}
       align="center"
     >
@@ -28,6 +21,7 @@ const Hero = () => {
           <Heading
             fontFamily="Quicksand, sans-serif"
             fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+            textAlign={{ base: "center", md: "initial" }}
           >
             <Text as={"span"} position={"relative"}>
               Cubicle
@@ -37,24 +31,15 @@ const Hero = () => {
               Welcomes you
             </Text>
           </Heading>
-          <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
+          <Text
+            fontSize={{ base: "md", lg: "lg" }}
+            textAlign={{ base: "center", md: "left" }}
+            color={"gray.500"}
+          >
             Cubicle is an online portal for techies which mainly focuses on the
             life of programmers in general. It also features coding tips, tricks
             and motivation
           </Text>
-          <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-            <Button
-              rounded={"full"}
-              bg={"blue.400"}
-              color={"white"}
-              _hover={{
-                bg: "blue.500",
-              }}
-            >
-              Go to Categories
-            </Button>
-            <Button rounded={"full"}>Start writing here</Button>
-          </Stack>
         </Stack>
       </Flex>
       <Flex flex={1}>

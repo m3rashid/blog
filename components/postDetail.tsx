@@ -18,7 +18,7 @@ const PostDetail: React.FC<IProps> = ({ post }) => {
         roundedTop="md"
         width={"full"}
       />
-      <Box p={6}>
+      <Box p={{ base: 3, md: 6 }}>
         <Box>
           <Heading as="h1" mb={8} size="2xl" fontFamily="Quicksand, sans-serif">
             {post.title}

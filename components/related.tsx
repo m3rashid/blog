@@ -1,4 +1,4 @@
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Heading, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { getAdjacentPosts } from "../services";
 import AdjacentPostCard from "./adjacentPostcard";
@@ -26,41 +26,21 @@ const RelatedPosts: React.FC<IProps> = ({ createdAt, slug }) => {
       bg={useColorModeValue("white", "gray.900")}
       boxShadow={"2xl"}
       rounded={"lg"}
-      p={6}
+      p={4}
     >
-      <div>
-        <Box fontSize={20} fontWeight="bold" mb={4}>
-          {dataLoaded && (
-            <>
-              {adjacentPost.previous && (
-                <div
-                  className={`${
-                    adjacentPost.next
-                      ? "col-span-1 lg:col-span-4"
-                      : "col-span-1 lg:col-span-8"
-                  } adjacent-post rounded-md lg:rounded-lg relative h-72`}
-                >
-                  <AdjacentPostCard
-                    post={adjacentPost.previous}
-                    position="LEFT"
-                  />
-                </div>
-              )}
-              {adjacentPost.next && (
-                <div
-                  className={`${
-                    adjacentPost.previous
-                      ? "col-span-1 lg:col-span-4"
-                      : "col-span-1 lg:col-span-8"
-                  } adjacent-post rounded-md lg:rounded-lg relative h-72`}
-                >
-                  <AdjacentPostCard post={adjacentPost.next} position="RIGHT" />
-                </div>
-              )}
-            </>
-          )}
-        </Box>
-      </div>
+      <Heading order={3} fontSize="xl" fontFamily="Quicksand" mb={4}>
+        Also Checkout
+      </Heading>
+      <Flex direction="column" gap={4} fontSize={20} fontWeight="bold">
+        {dataLoaded && (
+          <>
+            {adjacentPost.previous && (
+              <AdjacentPostCard post={adjacentPost.previous} />
+            )}
+            {adjacentPost.next && <AdjacentPostCard post={adjacentPost.next} />}
+          </>
+        )}
+      </Flex>
     </Box>
   );
 };

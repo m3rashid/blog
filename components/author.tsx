@@ -56,7 +56,7 @@ const Author: React.FC<IProps> = ({ author }) => {
       bg={useColorModeValue("white", "gray.900")}
       boxShadow={"2xl"}
       rounded={"lg"}
-      p={6}
+      p={4}
       textAlign={"center"}
     >
       <Avatar size={"xl"} src={author.photo.url} mb={4} />

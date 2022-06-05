@@ -203,6 +203,7 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
       modifiedText = a.replace(/\n/g, "<br />");
       return (
         <Code
+          className="scrollbar-style"
           key={index}
           overflowX="auto"
           py={3}

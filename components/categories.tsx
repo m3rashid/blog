@@ -2,8 +2,8 @@ import React from "react";
 import NextLink from "next/link";
 import { Box, Link, useColorModeValue } from "@chakra-ui/react";
 
-import { getCategories } from "../services";
 import { ICategory } from "../services/types";
+import { getCategories } from "../services";
 
 interface IProps {}
 
@@ -11,10 +11,7 @@ const Categories: React.FC<IProps> = () => {
   const [categories, setCategories] = React.useState<ICategory[]>([]);
 
   React.useEffect(() => {
-    getCategories().then((cat) => {
-      console.log(cat);
-      setCategories(cat);
-    });
+    getCategories().then((res) => setCategories(res));
   }, []);
 
   return (
@@ -24,7 +21,7 @@ const Categories: React.FC<IProps> = () => {
       bg={useColorModeValue("white", "gray.900")}
       boxShadow="2xl"
       rounded="lg"
-      p={6}
+      p={4}
     >
       <div>
         <Box fontSize={20} fontWeight="bold" mb={4}>
@@ -32,9 +29,9 @@ const Categories: React.FC<IProps> = () => {
         </Box>
         {categories.map((c: any) => {
           return (
-            <Link as={NextLink} key={c.slug} href={`/category/${c.slug}`}>
-              {c.name}
-            </Link>
+            <NextLink key={c.slug} href={`/category/${c.slug}`}>
+              <Link as={Box}>{c.name}</Link>
+            </NextLink>
           );
         })}
       </div>

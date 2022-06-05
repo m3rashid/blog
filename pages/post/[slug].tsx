@@ -6,12 +6,17 @@ import {
   Stack,
   useColorModeValue,
 } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import Author from "../../components/author";
 import Categories from "../../components/categories";
 import Comments from "../../components/comments";
+
+const CreateComment = dynamic(() => import("../../components/createComment"), {
+  ssr: false,
+});
 import PostDetail from "../../components/postDetail";
 import RelatedPosts from "../../components/related";
 import { getPostDetails, getPosts } from "../../services";
@@ -23,15 +28,15 @@ interface IProps {
 
 const Post: React.FC<IProps> = ({ post }) => {
   const router = useRouter();
-  const bgC = useColorModeValue("white", "gray.900");
   const keywords = post.title.split(" ");
   const result = keywords.filter((word: string) => word.length > 4);
+
   if (router.isFallback) {
     return <Spinner />;
   }
 
   return (
-    <Container as={Stack} px={0} maxW={"6xl"} mb={6}>
+    <Container as={Stack} padding="10px" maxW={"6xl"} mb={6}>
       <Head>
         <title>{post.title} | Cubicle</title>
         <meta name="description" content={post.excerpt} />
@@ -57,16 +62,14 @@ const Post: React.FC<IProps> = ({ post }) => {
         <PostDetail post={post} />
         <Stack width={"full"} spacing={6}>
           <Author author={post.author} />
-          <Categories />
           <RelatedPosts slug={post.slug} createdAt={post.createdAt} />
+          <Categories />
         </Stack>
       </SimpleGrid>
 
       <SimpleGrid templateColumns={{ sm: "1fr", md: "2fr 1fr" }} spacing={8}>
         <Comments slug={post.slug} />
-        <Box w={"full"} bg={bgC} boxShadow={"2xl"} rounded={"lg"} p={6}>
-          Create Comment
-        </Box>
+        <CreateComment slug={post.slug} />
       </SimpleGrid>
     </Container>
   );
@@ -80,7 +83,7 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
     props: {
       post: data,
     },
-    revalidate: 20,
+    revalidate: 100,
   };
 }
 

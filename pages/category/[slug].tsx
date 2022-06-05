@@ -1,38 +1,42 @@
-import { Flex, SimpleGrid, Spinner, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Spinner,
+  Stack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import Categories from "../../components/categories";
 import PostCard from "../../components/postcard";
-import RelatedPosts from "../../components/related";
 import { getCategories, getCategoryPost } from "../../services";
 import { SinglePost } from "../../services/types";
 
 interface IProps {
   posts: any;
-  category: string;
 }
 
-const Category: React.FC<IProps> = ({ posts, category }) => {
+const Category: React.FC<IProps> = ({ posts }) => {
   const router = useRouter();
+  const bgC = useColorModeValue("white", "gray.900");
+
   if (router.isFallback) {
     return <Spinner />;
   }
 
-  const keywords: string[] | undefined = category.split(" ");
-  keywords.push(router.query.slug as string);
-  const result = keywords.filter((word) => word.length > 3);
-
   return (
     <>
       <Head>
-        <title>{category} | Cubicle</title>
+        <title>Cubicle</title>
         <meta
           name="description"
           content="Cubicle is a blog website which mainly focuses on the life of programmers in general. Also, includes programming tips, tricks and tutorials"
         />
-        <meta name="keywords" content={result.join(", ")} />
-        <meta name="og:title" content={category + " | Cubicle"} />
+        <meta name="og:title" content={"Cubicle"} />
         <meta
           name="og:url"
           content={"https://cubicle.vercel.app/category/" + router.query.slug}
@@ -41,7 +45,7 @@ const Category: React.FC<IProps> = ({ posts, category }) => {
           name="og:description"
           content="Cubicle is a blog website which mainly focuses on the life of programmers in general. Also, includes programming tips, tricks and tutorials"
         />
-        <meta name="twitter:title" content={category + " | Cubicle"} />
+        <meta name="twitter:title" content={"Cubicle"} />
         <meta
           name="twitter:description"
           content="Cubicle is a blog website which mainly focuses on the life of programmers in general. Also, includes programming tips, tricks and tutorials"
@@ -53,25 +57,36 @@ const Category: React.FC<IProps> = ({ posts, category }) => {
           content="https://cubicle.vercel.app/fav.png"
         />
       </Head>
-      <Flex justifyContent="center">
+      <Flex justifyContent="center" padding="10px">
         <SimpleGrid
           templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr" }}
           spacing={8}
           maxW={"6xl"}
           py={10}
         >
-          <SimpleGrid
-            templateColumns={{ sm: "1fr", md: "1fr 1fr" }}
-            spacing={6}
-          >
-            {posts.map((post: SinglePost, index: number) => (
-              <PostCard key={index} post={post.node} />
-            ))}
-          </SimpleGrid>
-          <Stack w={"full"} spacing={6}>
-            <Categories />
-            {/* <RelatedPosts /> */}
-          </Stack>
+          {posts.length > 0 ? (
+            <SimpleGrid
+              templateColumns={{ sm: "1fr", md: "1fr 1fr" }}
+              spacing={6}
+            >
+              {posts.map((post: SinglePost, index: number) => (
+                <PostCard key={index} post={post.node} />
+              ))}
+            </SimpleGrid>
+          ) : (
+            <Box
+              bg={bgC}
+              boxShadow={"2xl"}
+              rounded={"md"}
+              p={6}
+              overflow={"hidden"}
+              fontSize={"2xl"}
+              fontWeight={"semibold"}
+            >
+              No posts found
+            </Box>
+          )}
+          <Categories />
         </SimpleGrid>
       </Flex>
     </>
@@ -81,14 +96,19 @@ const Category: React.FC<IProps> = ({ posts, category }) => {
 export default Category;
 
 interface ParamProps {
-  params: { slug: string };
+  params: {
+    slug: string;
+  };
 }
 
 export async function getStaticProps({ params }: ParamProps) {
   const posts = await getCategoryPost(params.slug);
-  const category = posts[0].node.categories[0].name;
+  const category = posts.length > 0 ? posts[0].node.categories[0].name : "";
   return {
-    props: { posts, category },
+    props: {
+      posts,
+      category,
+    },
     revalidate: 20,
   };
 }

@@ -13,7 +13,11 @@ import {
 import NextLink from "next/link";
 import { IPost } from "../services/types";
 
-const PostCard = ({ post }: { post: IPost }) => {
+interface IProps {
+  post: IPost;
+}
+
+const PostCard: React.FC<IProps> = ({ post }) => {
   return (
     <Center>
       <Box
@@ -22,7 +26,8 @@ const PostCard = ({ post }: { post: IPost }) => {
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
         rounded={"md"}
-        p={6}
+        px={{ base: 2, md: 6 }}
+        py={{ base: 4, md: 6 }}
         overflow={"hidden"}
       >
         <Box
@@ -58,7 +63,7 @@ const PostCard = ({ post }: { post: IPost }) => {
         <Stack>
           <Heading
             color={useColorModeValue("gray.700", "white")}
-            fontSize={"2xl"}
+            fontSize={{ base: "xl", md: "2xl" }}
             fontFamily="Quicksand, sans-serif"
           >
             <Link as={NextLink} href={`/post/${post.slug}`}>
@@ -67,7 +72,12 @@ const PostCard = ({ post }: { post: IPost }) => {
           </Heading>
           <Text color={"gray.500"}>{post.excerpt.substring(0, 75)} . .</Text>
         </Stack>
-        <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
+        <Stack
+          mt={{ base: 4, md: 6 }}
+          direction={"row"}
+          spacing={4}
+          align={"center"}
+        >
           <Avatar src={post.author.photo?.url} />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
             <Text fontWeight={600}>{post.author.name}</Text>

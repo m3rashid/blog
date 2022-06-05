@@ -33,11 +33,11 @@ const Footer = () => {
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
-          templateColumns="1fr 1fr"
+          templateColumns={{ base: "1fr", md: "1fr 1fr" }}
           justifyContent="space-between"
           spacing={8}
         >
-          <Stack spacing={6}>
+          <Stack spacing={{ base: 2, md: 6 }}>
             <Box>
               <Flex gap={2} alignItems={"center"}>
                 <Image
@@ -59,23 +59,19 @@ const Footer = () => {
               &copy; {new Date().getFullYear()} Cubicle. All rights reserved
             </Text>
           </Stack>
-          <Stack align={"flex-end"}>
+          <Stack align={{ base: "flex-start", md: "flex-end" }}>
             <ListHeader>Stay up to date</ListHeader>
             <Stack direction={"row"}>
               <Input
                 placeholder={"Your email address"}
                 bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
                 border={0}
-                _focus={{
-                  bg: "whiteAlpha.300",
-                }}
+                _focus={{ bg: "whiteAlpha.300" }}
               />
               <IconButton
                 bg={useColorModeValue("blue.400", "blue.500")}
                 color={useColorModeValue("white", "gray.800")}
-                _hover={{
-                  bg: "blue.600",
-                }}
+                _hover={{ bg: "blue.600" }}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
               />
