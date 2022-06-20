@@ -211,8 +211,9 @@ const getContentFragment = (index?: any, text?: any, obj?: any, type?: any) => {
           mb={6}
           rounded="md"
           width="100%"
+          maxWidth="100vw"
           fontFamily="monospace"
-          wordBreak="break-all"
+          whiteSpace="nowrap"
           dangerouslySetInnerHTML={{ __html: modifiedText }}
         />
       );
